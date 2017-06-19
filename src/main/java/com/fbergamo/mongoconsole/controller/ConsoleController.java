@@ -35,6 +35,13 @@ public class ConsoleController {
        return coll.find().limit(50).into(new ArrayList<Document>());
     }
 
+    @PostMapping("/find")
+    public Collection<Document> find(@RequestBody DatabaseQuery dbq){
+        MongoCollection coll = client.getDatabase(dbq.getDatabaseName()).getCollection(dbq.getCollectionName());
+        Document query = Document.parse(dbq.getQuery());
+        return coll.find(query).into(new ArrayList<Document>());
+    }
+
     @PostMapping("/count")
     public long countDocuments(@RequestBody DatabaseQuery dbq){
         MongoCollection coll = client.getDatabase(dbq.getDatabaseName()).getCollection(dbq.getCollectionName());

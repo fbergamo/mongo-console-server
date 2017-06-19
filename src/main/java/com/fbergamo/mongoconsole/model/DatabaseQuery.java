@@ -4,6 +4,17 @@ public class DatabaseQuery {
 
     private String databaseName;
     private String collectionName;
+    private String query;
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+
 
     public String getCollectionName() {
         return collectionName;
