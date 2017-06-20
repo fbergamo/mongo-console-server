@@ -42,6 +42,16 @@ public class ConsoleController {
         return coll.find(query).into(new ArrayList<Document>());
     }
 
+
+    @PostMapping("/insertOne")
+    public boolean insertOne(@RequestBody DatabaseQuery dbq){
+        MongoCollection coll = client.getDatabase(dbq.getDatabaseName()).getCollection(dbq.getCollectionName());
+        Document document = Document.parse(dbq.getQuery());
+        coll.insertOne(document);
+        return true;
+    }
+
+
     @PostMapping("/count")
     public long countDocuments(@RequestBody DatabaseQuery dbq){
         MongoCollection coll = client.getDatabase(dbq.getDatabaseName()).getCollection(dbq.getCollectionName());
